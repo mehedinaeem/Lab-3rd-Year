@@ -256,3 +256,64 @@ int main() {
 
     return 0;
 }
+
+/*Enter number of productions: 5
+Enter productions (use # for epsilon):
+E->TX
+X->+TX|#
+T->FY
+Y->*FY|#
+F->(E)|i
+
+=== FIRST Sets ===
+FIRST(E) = {( i }
+FIRST(F) = {( i }
+FIRST(T) = {( i }
+FIRST(X) = {# + }
+FIRST(Y) = {# * }
+
+=== FOLLOW Sets ===
+FOLLOW(E) = {$ ) }
+FOLLOW(F) = {$ ) * + }
+FOLLOW(T) = {$ ) + }
+FOLLOW(X) = {$ ) }
+FOLLOW(Y) = {$ ) + }
+
+=== Parsing Table ===
+[E, (] = TX
+[E, i] = TX
+[F, (] = (E)
+[F, i] = i
+[T, (] = FY
+[T, i] = FY
+[X, $] = #
+[X, )] = #
+[X, +] = +TX
+[Y, $] = #
+[Y, )] = #
+[Y, *] = *FY
+[Y, +] = #
+
+Enter input string to parse: i+i*i
+
+Parsing Steps:
+Stack           Input           Action
+E$              i+i*i$          E->TX
+TX$             i+i*i$          T->FY
+FYX$            i+i*i$          F->i
+iYX$            i+i*i$          Match i
+YX$             +i*i$           Y->#
+X$              +i*i$           X->+TX
++TX$            +i*i$           Match +
+TX$             i*i$            T->FY
+FYX$            i*i$            F->i
+iYX$            i*i$            Match i
+YX$             *i$             Y->*FY
+*FYX$           *i$             Match *
+FYX$            i$              F->i
+iYX$            i$              Match i
+YX$             $               Y->#
+X$              $               X->#
+$               $               Accept
+
+Input string is Accepted by the Grammar.*/
