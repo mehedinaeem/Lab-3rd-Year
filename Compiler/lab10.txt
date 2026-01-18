@@ -1,0 +1,8 @@
+int main() {
+    int a = 10;
+    /*****
+     * buter vari chine 
+     * na
+     */
+    a += 5; // increment
+}
